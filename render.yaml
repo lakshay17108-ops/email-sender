@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: bulk-email-sender
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r bulk-email-sender/requirements.txt
+    startCommand: streamlit run bulk-email-sender/app.py --server.headless=true --server.address=0.0.0.0 --server.port=$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: EMAIL_ADDRESS
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: EMAIL_PROVIDER
+        value: Gmail
